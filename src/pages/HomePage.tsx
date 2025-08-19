@@ -30,9 +30,9 @@ const HomePage: React.FC = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80"></div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
             Book Perfect Venues for
-            <span className="block bg-gradient-to-r from-primary-glow to-white bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Memorable Events
             </span>
           </h1>
@@ -141,23 +141,146 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-primary to-primary-glow">
+      {/* How It Works Section */}
+      <section className="py-20 bg-gradient-to-br from-secondary/20 to-accent/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-display font-bold text-foreground mb-4">How BookIt Works</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Simple, fast, and secure booking process designed for modern event planning
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '01',
+                title: 'Browse & Discover',
+                description: 'Explore our curated collection of premium venues and exciting events tailored to your needs.',
+                icon: Search
+              },
+              {
+                step: '02', 
+                title: 'Book Instantly',
+                description: 'Secure your booking with our streamlined process. Real-time availability and instant confirmation.',
+                icon: Calendar
+              },
+              {
+                step: '03',
+                title: 'Enjoy Your Event',
+                description: 'Relax and enjoy your perfectly planned event with our dedicated support throughout your experience.',
+                icon: Star
+              }
+            ].map((item, index) => (
+              <Card key={index} className="relative overflow-hidden group hover:shadow-luxury transition-all duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="text-6xl font-display font-bold text-primary/20 mb-4">{item.step}</div>
+                  <item.icon className="h-12 w-12 mx-auto text-primary mb-6" />
+                  <h3 className="text-xl font-semibold text-foreground mb-4">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-display font-bold text-foreground mb-4">What Our Clients Say</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Trusted by event planners and venue owners worldwide
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Sarah Chen',
+                role: 'Event Coordinator',
+                company: 'Luxe Events',
+                testimonial: 'BookIt transformed how we handle venue bookings. The interface is intuitive and the booking process is seamless.',
+                rating: 5
+              },
+              {
+                name: 'Marcus Rodriguez',
+                role: 'Wedding Planner',
+                company: 'Dream Weddings Co.',
+                testimonial: 'The variety of venues and the detailed information helps us find perfect matches for our clients every time.',
+                rating: 5
+              },
+              {
+                name: 'Emily Thompson',
+                role: 'Corporate Events Manager',
+                company: 'Tech Solutions Inc.',
+                testimonial: 'Professional, reliable, and efficient. BookIt is our go-to platform for all corporate event venue needs.',
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="hover:shadow-glow transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-primary fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-6 italic">"{testimonial.testimonial}"</p>
+                  <div>
+                    <div className="font-semibold text-foreground">{testimonial.name}</div>
+                    <div className="text-sm text-primary">{testimonial.role}</div>
+                    <div className="text-sm text-muted-foreground">{testimonial.company}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-20 bg-gradient-to-r from-muted to-muted/50">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-4">
+            Stay Updated with Premium Venues
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Get exclusive access to new venues, special offers, and event planning tips
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
+            <Input
+              type="email"
+              placeholder="Enter your email address"
+              className="flex-1"
+            />
+            <Button variant="default" className="shadow-md">
+              Subscribe
+            </Button>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Join 10,000+ event planners who trust BookIt for their venue needs
+          </p>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-display font-bold text-white mb-6">
             Ready to Host Your Next Event?
           </h2>
-          <p className="text-xl text-white/90 mb-8">
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers who trust us with their most important events
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">
-              <Button variant="secondary" size="lg" className="shadow-lg">
+              <Button variant="secondary" size="lg" className="shadow-xl bg-white text-foreground hover:bg-white/90">
                 Get Started Today
               </Button>
             </Link>
             <Link to="/venues">
-              <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20 shadow-md">
+              <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20 shadow-lg backdrop-blur-sm">
                 Explore Venues
               </Button>
             </Link>

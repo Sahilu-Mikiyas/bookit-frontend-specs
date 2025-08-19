@@ -2,67 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Venue & Event Booking Design System 
+/* Sophisticated Dark Venue & Event Booking Design System 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Base Colors */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Dark Sophisticated Base */
+    --background: 222 22% 8%;
+    --foreground: 210 20% 95%;
 
-    /* Card System */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    /* Card System - Elegant Dark Cards */
+    --card: 222 20% 11%;
+    --card-foreground: 210 20% 95%;
 
     /* Popover System */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 222 20% 11%;
+    --popover-foreground: 210 20% 95%;
 
-    /* Professional Brand Colors */
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 221 83% 63%;
+    /* Sophisticated Brand Colors - Gold & Purple */
+    --primary: 45 100% 65%;
+    --primary-foreground: 222 22% 8%;
+    --primary-glow: 45 100% 75%;
 
-    /* Secondary Professional Tones */
-    --secondary: 215 25% 27%;
-    --secondary-foreground: 0 0% 100%;
+    /* Rich Purple Secondary */
+    --secondary: 262 52% 47%;
+    --secondary-foreground: 210 20% 95%;
 
-    /* Muted & Background Variants */
-    --muted: 220 13% 95%;
-    --muted-foreground: 215 25% 35%;
+    /* Muted Sophisticated Tones */
+    --muted: 222 18% 16%;
+    --muted-foreground: 210 15% 65%;
 
-    /* Accent Colors */
-    --accent: 221 83% 53%;
-    --accent-foreground: 0 0% 100%;
+    /* Elegant Accent - Teal */
+    --accent: 180 62% 55%;
+    --accent-foreground: 222 22% 8%;
 
-    /* Status Colors */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --warning: 45 93% 47%;
-    --warning-foreground: 0 0% 100%;
+    /* Status Colors - Rich Versions */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 20% 95%;
+    --success: 150 65% 50%;
+    --success-foreground: 222 22% 8%;
+    --warning: 35 85% 60%;
+    --warning-foreground: 222 22% 8%;
 
-    /* Border & Input */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 221 83% 53%;
+    /* Border & Input - Subtle Dark */
+    --border: 222 18% 20%;
+    --input: 222 18% 16%;
+    --ring: 45 100% 65%;
 
     /* Design Tokens */
     --radius: 0.75rem;
 
-    /* Professional Gradients */
+    /* Sophisticated Dark Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(221 83% 63%) 50%, hsl(215 25% 27%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 13% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(262 52% 47%) 50%, hsl(180 62% 55%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(222 20% 11%) 0%, hsl(222 18% 16%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(262 52% 47%) 0%, hsl(45 100% 65%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 62% 55%) 0%, hsl(262 52% 47%) 100%);
 
-    /* Professional Shadows */
-    --shadow-soft: 0 1px 3px hsl(221 83% 53% / 0.1);
-    --shadow-medium: 0 4px 12px hsl(221 83% 53% / 0.15);
-    --shadow-large: 0 10px 25px hsl(221 83% 53% / 0.15);
-    --shadow-glow: 0 0 20px hsl(221 83% 53% / 0.3);
+    /* Sophisticated Shadows */
+    --shadow-soft: 0 2px 8px hsl(222 22% 4% / 0.3);
+    --shadow-medium: 0 8px 24px hsl(222 22% 4% / 0.4);
+    --shadow-large: 0 16px 48px hsl(222 22% 4% / 0.5);
+    --shadow-glow: 0 0 32px hsl(45 100% 65% / 0.2);
+    --shadow-luxury: 0 8px 32px hsl(262 52% 47% / 0.3);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
