@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { LogIn, Mail, Lock } from 'lucide-react';
+import { Shield, Mail, Lock } from 'lucide-react';
 
-const LoginPage: React.FC = () => {
+const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -23,14 +23,14 @@ const LoginPage: React.FC = () => {
     try {
       await login(email, password);
       toast({
-        title: "Welcome back!",
-        description: "You have successfully logged in.",
+        title: "Admin Access Granted",
+        description: "Welcome to the admin dashboard.",
       });
-      navigate('/');
+      navigate('/admin');
     } catch (error) {
       toast({
-        title: "Login Failed",
-        description: "Invalid email or password. Please try again.",
+        title: "Access Denied",
+        description: "Invalid admin credentials. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -42,27 +42,28 @@ const LoginPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary-glow/5 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h2>
-          <p className="text-muted-foreground">Sign in to your BookIt account</p>
+          <Shield className="mx-auto h-12 w-12 text-primary mb-4" />
+          <h2 className="text-3xl font-bold text-foreground mb-2">Admin Access</h2>
+          <p className="text-muted-foreground">Secure login for administrators</p>
         </div>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-lg border-2">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <LogIn className="h-5 w-5" />
-              Sign In
+            <CardTitle className="flex items-center gap-2 text-primary">
+              <Shield className="h-5 w-5" />
+              Administrator Login
             </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="admin-email">Admin Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="email"
+                    id="admin-email"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter admin email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10"
@@ -72,13 +73,13 @@ const LoginPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="admin-password">Admin Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="password"
+                    id="admin-password"
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder="Enter admin password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="pl-10"
@@ -92,31 +93,14 @@ const LoginPage: React.FC = () => {
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? 'Signing In...' : 'Sign In'}
+                {isLoading ? 'Verifying...' : 'Access Dashboard'}
               </Button>
             </form>
 
-            <div className="mt-6 text-center space-y-4">
-              <div className="text-sm">
-                <Link to="/reset-password" className="text-primary hover:text-primary/80">
-                  Forgot your password?
-                </Link>
-              </div>
-              
-              <div className="text-sm text-muted-foreground">
-                Don't have an account?{' '}
-                <Link to="/register" className="text-primary hover:text-primary/80 font-medium">
-                  Sign up here
-                </Link>
-              </div>
-            </div>
-
-            {/* Demo Credentials */}
-            <div className="mt-6 p-4 bg-muted rounded-md">
-              <h4 className="text-sm font-medium text-muted-foreground mb-2">Demo Credentials:</h4>
+            <div className="mt-6 p-4 bg-warning/10 border border-warning/20 rounded-md">
+              <h4 className="text-sm font-medium text-warning mb-2">Demo Admin Access:</h4>
               <div className="text-xs text-muted-foreground space-y-1">
-                <div>Admin: admin@bookit.com</div>
-                <div>User: john@example.com</div>
+                <div>Email: admin@bookit.com</div>
                 <div>Password: any password works</div>
               </div>
             </div>
@@ -127,4 +111,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default AdminLoginPage;

@@ -6,6 +6,7 @@ interface AuthContextType extends AuthState {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   setUser: (user: User | null) => void;
+  setRole: (role: UserRole) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,6 +20,7 @@ const mockUsers: User[] = [
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
 
   const login = async (email: string, password: string): Promise<void> => {
     // Mock login - in real app, this would call an API
@@ -43,16 +45,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUser(null);
+    setSelectedRole(null);
+  };
+
+  const setRole = (role: UserRole) => {
+    setSelectedRole(role);
   };
 
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
-    role: user?.role || 'guest',
+    role: selectedRole || user?.role || 'guest',
     login,
     register,
     logout,
     setUser,
+    setRole,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
