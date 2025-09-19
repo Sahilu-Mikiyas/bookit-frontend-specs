@@ -24,6 +24,13 @@ import ProviderDashboard from "./pages/ProviderDashboard";
 import AddVenuePage from "./pages/AddVenuePage";
 import HelpPage from "./pages/HelpPage";
 import ContactPage from "./pages/ContactPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import BookingConfirmationPage from "./pages/BookingConfirmationPage";
+import BookingGuidePage from "./pages/BookingGuidePage";
+import AboutPage from "./pages/AboutPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -54,6 +61,13 @@ const App = () => (
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/provider/dashboard" element={<ProviderDashboard />} />
               <Route path="/provider/add-venue" element={<AddVenuePage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
+              <Route path="/booking-guide" element={<BookingGuidePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/help" element={<HelpPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
