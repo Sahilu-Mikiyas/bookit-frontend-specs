@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,7 @@ import { mockVenues } from '@/data/mockData';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 
 const VenuesPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredVenues, setFilteredVenues] = useState(mockVenues);
 
@@ -93,10 +95,7 @@ const VenuesPage: React.FC = () => {
               <VenueCard 
                 key={venue.id} 
                 venue={venue}
-                onSelect={(venue) => {
-                  // In a real app, this would navigate to venue details
-                  console.log('Selected venue:', venue);
-                }}
+                onSelect={(venue) => navigate(`/venue/${venue.id}`)}
               />
             ))}
           </div>

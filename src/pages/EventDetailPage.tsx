@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -22,6 +22,7 @@ import {
 
 const EventDetailPage: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { toast } = useToast();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -71,10 +72,7 @@ const EventDetailPage: React.FC = () => {
       return;
     }
 
-    toast({
-      title: "Booking Started",
-      description: "Redirecting to booking page...",
-    });
+    navigate('/checkout');
   };
 
   const handleToggleFavorite = () => {
@@ -225,7 +223,7 @@ const EventDetailPage: React.FC = () => {
                   disabled={!event.isPublic}
                 >
                   <Ticket className="h-4 w-4 mr-2" />
-                  {event.isPublic ? 'Book Event' : 'Private Event'}
+                  {event.isPublic ? 'Book & Pay' : 'Private Event'}
                 </Button>
 
                 {!isAuthenticated && (

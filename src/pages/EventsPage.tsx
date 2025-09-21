@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,7 @@ import { Search, Filter, Calendar } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const EventsPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredEvents, setFilteredEvents] = useState(getEventsWithVenues());
   const { isAuthenticated } = useAuth();
@@ -116,10 +118,7 @@ const EventsPage: React.FC = () => {
                 key={event.id} 
                 event={event}
                 isAuthenticated={isAuthenticated}
-                onSelect={(event) => {
-                  // In a real app, this would navigate to event details
-                  console.log('Selected event:', event);
-                }}
+                onSelect={(event) => navigate(`/event/${event.id}`)}
                 onBook={handleBookEvent}
               />
             ))}

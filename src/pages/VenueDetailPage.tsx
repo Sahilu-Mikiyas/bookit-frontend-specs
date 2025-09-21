@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,7 @@ import {
 
 const VenueDetailPage: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const venue = mockVenues.find(v => v.id === id);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -189,8 +190,8 @@ const VenueDetailPage: React.FC = () => {
                   <Calendar className="h-4 w-4 mr-2" />
                   Check Availability
                 </Button>
-                <Button>
-                  Book Now
+                <Button onClick={() => navigate('/checkout')}>
+                  Book & Pay
                 </Button>
               </div>
             </div>
