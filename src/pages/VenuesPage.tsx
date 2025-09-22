@@ -1,22 +1,50 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import VenueCard from '@/components/cards/VenueCard';
 import { mockVenues } from '@/data/mockData';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 
 const VenuesPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredVenues, setFilteredVenues] = useState(mockVenues);
 
-  const handleSearch = () => {
+  useEffect(() => {
+    // Check if search term was passed from home page
+    if (location.state?.searchTerm) {
+      const term = location.state.searchTerm;
+      setSearchTerm(term);
+      handleSearch(term);
+    }
+  }, [location.state]);
+
+  const handleViewDetails = (venue: any) => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login Required",
+        description: "This feature is only available for logged in users.",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return;
+    }
+    navigate(`/venue/${venue.id}`);
+  };
+
+  const handleSearch = (term?: string) => {
+    const searchValue = term || searchTerm;
     const filtered = mockVenues.filter(venue =>
-      venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      venue.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      venue.description.toLowerCase().includes(searchTerm.toLowerCase())
+      venue.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      venue.location.toLowerCase().includes(searchValue.toLowerCase()) ||
+      venue.description.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredVenues(filtered);
   };
@@ -67,7 +95,7 @@ const VenuesPage: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button onClick={handleSearch} className="flex items-center gap-2">
+                <Button onClick={() => handleSearch()} className="flex items-center gap-2">
                   <Search className="h-4 w-4" />
                   Search
                 </Button>
@@ -95,7 +123,7 @@ const VenuesPage: React.FC = () => {
               <VenueCard 
                 key={venue.id} 
                 venue={venue}
-                onSelect={(venue) => navigate(`/venue/${venue.id}`)}
+                onSelect={handleViewDetails}
               />
             ))}
           </div>

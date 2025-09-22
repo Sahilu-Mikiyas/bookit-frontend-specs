@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,17 +11,41 @@ import { useToast } from '@/hooks/use-toast';
 
 const EventsPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredEvents, setFilteredEvents] = useState(getEventsWithVenues());
   const { isAuthenticated } = useAuth();
   const { toast } = useToast();
 
-  const handleSearch = () => {
+  useEffect(() => {
+    // Check if search term was passed from home page
+    if (location.state?.searchTerm) {
+      const term = location.state.searchTerm;
+      setSearchTerm(term);
+      handleSearch(term);
+    }
+  }, [location.state]);
+
+  const handleViewDetails = (event: any) => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login Required",
+        description: "This feature is only available for logged in users.",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return;
+    }
+    navigate(`/event/${event.id}`);
+  };
+
+  const handleSearch = (term?: string) => {
+    const searchValue = term || searchTerm;
     const filtered = getEventsWithVenues().filter(event =>
-      event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.organizer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (event.venue && event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      event.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchValue.toLowerCase()) ||
+      event.organizer.toLowerCase().includes(searchValue.toLowerCase()) ||
+      (event.venue && event.venue.name.toLowerCase().includes(searchValue.toLowerCase()))
     );
     setFilteredEvents(filtered);
   };
@@ -89,7 +113,7 @@ const EventsPage: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button onClick={handleSearch} className="flex items-center gap-2">
+                <Button onClick={() => handleSearch()} className="flex items-center gap-2">
                   <Search className="h-4 w-4" />
                   Search
                 </Button>
@@ -118,7 +142,7 @@ const EventsPage: React.FC = () => {
                 key={event.id} 
                 event={event}
                 isAuthenticated={isAuthenticated}
-                onSelect={(event) => navigate(`/event/${event.id}`)}
+                onSelect={handleViewDetails}
                 onBook={handleBookEvent}
               />
             ))}

@@ -1,18 +1,60 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import VenueCard from '@/components/cards/VenueCard';
 import EventCard from '@/components/cards/EventCard';
 import { mockVenues, getEventsWithVenues } from '@/data/mockData';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 import { Search, Calendar, MapPin, Users, Star } from 'lucide-react';
 import heroImage from '@/assets/hero-venue.jpg';
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const featuredVenues = mockVenues.slice(0, 3);
   const upcomingEvents = getEventsWithVenues().slice(0, 3);
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    
+    const searchResults = {
+      venues: mockVenues.filter(venue => 
+        venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        venue.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        venue.description.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+      events: getEventsWithVenues().filter(event => 
+        event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.organizer.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    };
+
+    // Navigate to venues page if more venue results, otherwise events page
+    if (searchResults.venues.length >= searchResults.events.length) {
+      navigate('/venues', { state: { searchTerm } });
+    } else {
+      navigate('/events', { state: { searchTerm } });
+    }
+  };
+
+  const handleViewDetails = (type: 'venue' | 'event', id: string) => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login Required",
+        description: "This feature is only available for logged in users.",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return;
+    }
+    navigate(`/${type}/${id}`);
+  };
 
   const stats = [
     { icon: MapPin, label: 'Venues Available', value: '50+' },
@@ -52,7 +94,7 @@ const HomePage: React.FC = () => {
                 className="pl-10 bg-white/90 backdrop-blur-sm border-white/20"
               />
             </div>
-            <Button variant="hero" size="hero" className="shadow-lg">
+            <Button variant="hero" size="hero" className="shadow-lg" onClick={handleSearch}>
               Search
             </Button>
           </div>
@@ -101,7 +143,11 @@ const HomePage: React.FC = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {featuredVenues.map((venue) => (
-              <VenueCard key={venue.id} venue={venue} />
+              <VenueCard 
+                key={venue.id} 
+                venue={venue} 
+                onSelect={() => handleViewDetails('venue', venue.id)}
+              />
             ))}
           </div>
           
@@ -127,7 +173,12 @@ const HomePage: React.FC = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard 
+                key={event.id} 
+                event={event} 
+                onSelect={() => handleViewDetails('event', event.id)}
+                isAuthenticated={isAuthenticated}
+              />
             ))}
           </div>
           
@@ -275,7 +326,7 @@ const HomePage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">
-              <Button variant="secondary" size="lg" className="shadow-xl bg-white text-foreground hover:bg-white/90">
+              <Button variant="secondary" size="lg" className="shadow-xl bg-white text-primary hover:bg-white/90 font-semibold">
                 Get Started Today
               </Button>
             </Link>
