@@ -91,7 +91,7 @@ const HomePage: React.FC = () => {
                 placeholder="Search venues or events..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white/90 backdrop-blur-sm border-white/20"
+                className="pl-10 bg-white/90 backdrop-blur-sm border-white/20 text-foreground placeholder:text-muted-foreground"
               />
             </div>
             <Button variant="hero" size="hero" className="shadow-lg" onClick={handleSearch}>
