@@ -31,16 +31,16 @@ const Footer: React.FC = () => {
 
   const supportLinks = [
     { label: 'Help Center', href: '/help' },
-    { label: 'Contact Support', href: '/support' },
-    { label: 'Booking Guide', href: '/guide' },
+    { label: 'Contact Support', href: '/contact-support' },
+    { label: 'Booking Guide', href: '/booking-guide' },
     { label: 'FAQ', href: '/faq' },
   ];
 
   const legalLinks = [
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
-    { label: 'Cookie Policy', href: '/cookies' },
-    { label: 'Refund Policy', href: '/refunds' },
+    { label: 'Cookie Policy', href: '/cookie-policy' },
+    { label: 'Refund Policy', href: '/refund-policy' },
   ];
 
   const socialLinks = [
@@ -97,9 +97,9 @@ const Footer: React.FC = () => {
                   <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                   <div className="text-sm text-muted-foreground">
                     <div className="font-medium text-foreground">BookIt Headquarters</div>
-                    <div>1250 Executive Plaza</div>
-                    <div>New York, NY 10001</div>
-                    <div>United States</div>
+                    <div>Bole Medhanialem Lingo Tower</div>
+                    <div>11th Floor, Addis Ababa</div>
+                    <div>Ethiopia</div>
                   </div>
                 </div>
                 
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                   <div className="text-sm">
-                    <div className="text-foreground font-medium">hello@bookit.com</div>
+                    <div className="text-foreground font-medium">hellotobookit@gmail.com</div>
                     <div className="text-muted-foreground">Get in touch</div>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <div className="text-sm text-muted-foreground">
               © {currentYear} BookIt. All rights reserved. Built with{' '}
-              <Heart className="h-4 w-4 inline text-destructive fill-current" /> in New York.
+              <Heart className="h-4 w-4 inline text-destructive fill-current" /> in Addis Ababa, Ethiopia.
             </div>
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">
               <span>🔒 Secure Booking</span>

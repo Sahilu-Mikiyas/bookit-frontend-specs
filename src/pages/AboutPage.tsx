@@ -51,13 +51,13 @@ const AboutPage: React.FC = () => {
 
   const team = [
     {
-      name: 'Sarah Johnson',
+      name: 'Mikiyas Sahilu',
       role: 'CEO & Founder',
       bio: '10+ years in event management and technology. Previously led product at major hospitality platforms.',
-      image: '👩‍💼'
+      image: '👨‍💼'
     },
     {
-      name: 'Michael Chen',
+      name: 'Adam Tadesse',
       role: 'CTO',
       bio: 'Former senior engineer at Google. Expert in scalable platform architecture and user experience.',
       image: '👨‍💻'
