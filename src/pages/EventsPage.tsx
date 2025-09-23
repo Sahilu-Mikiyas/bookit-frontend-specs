@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -134,30 +134,7 @@ const EventsPage: React.FC = () => {
           </p>
         </div>
 
-      {/* Partner Section for logged in users */}
-      {isAuthenticated && (
-        <section className="mb-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Share Your Events with BookIt</h2>
-          <p className="mb-6 max-w-2xl mx-auto">
-            Join thousands of event organizers who trust BookIt to reach their audience. 
-            Create and promote your events to a wider community.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/create-event">
-              <Button variant="secondary" size="lg" className="px-6">
-                Create Event
-              </Button>
-            </Link>
-            <Link to="/partner-application">
-              <Button variant="outline" size="lg" className="px-6 bg-white/10 border-white/30 text-white hover:bg-white/20">
-                Become a Partner
-              </Button>
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* Events Grid */}
+        {/* Events Grid */}
         {filteredEvents.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEvents.map((event) => (
