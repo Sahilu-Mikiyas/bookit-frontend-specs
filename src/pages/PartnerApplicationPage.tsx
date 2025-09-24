@@ -6,11 +6,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 import { Upload, FileText, Building, Award, Shield } from 'lucide-react';
 
 const PartnerApplicationPage: React.FC = () => {
   const navigate = useNavigate();
+  const { setPartnerApproved } = useAuth();
   const [formData, setFormData] = useState({
     businessName: '',
     contactPerson: '',
@@ -27,7 +29,9 @@ const PartnerApplicationPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Partnership application submitted successfully! We will review your application and contact you within 5-7 business days.');
+    // Auto-approve for demo purposes
+    setPartnerApproved(true);
+    toast.success('Partnership application submitted successfully! You are now approved to create venues and events.');
     navigate('/');
   };
 

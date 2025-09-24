@@ -91,12 +91,21 @@ const HomePage: React.FC = () => {
                 placeholder="Search venues or events..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white/90 backdrop-blur-sm border-white/20 text-foreground placeholder:text-muted-foreground"
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                className="pl-10 bg-white/90 backdrop-blur-sm border-white/20 text-black placeholder:text-gray-600"
               />
             </div>
             <Button variant="hero" size="hero" className="shadow-lg" onClick={handleSearch}>
               Search
             </Button>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Link to="/booking-guide">
+              <Button variant="hero" size="lg" className="shadow-md bg-white/20 border-white/30 text-white hover:bg-white/30">
+                How to Book
+              </Button>
+            </Link>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -113,6 +122,32 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Partner Promotion Section */}
+      {isAuthenticated && (
+        <section className="py-16 bg-gradient-to-r from-primary via-secondary to-accent">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Grow Your Business with BookIt
+            </h2>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Join our network of trusted partners and reach thousands of potential customers. List your venue and start earning today!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/create-venue">
+                <Button variant="secondary" size="lg" className="shadow-xl bg-white text-primary hover:bg-white/90 font-semibold">
+                  Create Venue
+                </Button>
+              </Link>
+              <Link to="/partner-application">
+                <Button variant="outline" size="lg" className="bg-white/10 border-white/30 text-white hover:bg-white/20 shadow-lg backdrop-blur-sm">
+                  Become a Partner
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Stats Section */}
       <section className="py-16 bg-muted/50">

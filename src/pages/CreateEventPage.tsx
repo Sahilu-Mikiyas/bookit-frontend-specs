@@ -58,44 +58,45 @@ const CreateEventPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-black to-slate-800 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4 text-white hover:bg-white/10">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
-          <h1 className="text-4xl font-bold text-foreground mb-2">Create New Event</h1>
-          <p className="text-lg text-muted-foreground">
+          <h1 className="text-4xl font-bold text-white mb-2">Create New Event</h1>
+          <p className="text-lg text-gray-300">
             Share your event with thousands of potential attendees
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Calendar className="h-5 w-5 text-yellow-400" />
                 Event Information
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium text-gray-200 mb-2">
                   Event Title *
                 </label>
                 <Input
                   value={formData.title}
                   onChange={(e) => handleChange('title', e.target.value)}
                   placeholder="Enter event title"
+                  className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium text-gray-200 mb-2">
                   Description *
                 </label>
                 <Textarea
@@ -103,22 +104,23 @@ const CreateEventPage: React.FC = () => {
                   onChange={(e) => handleChange('description', e.target.value)}
                   placeholder="Describe your event, what attendees can expect..."
                   rows={4}
+                  className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Category *
                   </label>
                   <Select value={formData.category} onValueChange={(value) => handleChange('category', value)}>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
                       <SelectValue placeholder="Select event category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-slate-700 border-slate-600">
                       {categories.map((category) => (
-                        <SelectItem key={category} value={category.toLowerCase()}>
+                        <SelectItem key={category} value={category.toLowerCase()} className="text-white hover:bg-slate-600">
                           {category}
                         </SelectItem>
                       ))}
@@ -127,13 +129,14 @@ const CreateEventPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Event Tags
                   </label>
                   <Input
                     value={formData.tags}
                     onChange={(e) => handleChange('tags', e.target.value)}
                     placeholder="e.g., networking, professional, entertainment"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -141,41 +144,43 @@ const CreateEventPage: React.FC = () => {
           </Card>
 
           {/* Date & Time */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Clock className="h-5 w-5 text-yellow-400" />
                 Date & Time
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Date *
                   </label>
                   <Input
                     type="date"
                     value={formData.date}
                     onChange={(e) => handleChange('date', e.target.value)}
+                    className="bg-slate-700 border-slate-600 text-white"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Start Time *
                   </label>
                   <Input
                     type="time"
                     value={formData.time}
                     onChange={(e) => handleChange('time', e.target.value)}
+                    className="bg-slate-700 border-slate-600 text-white"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Duration (hours) *
                   </label>
                   <Input
@@ -183,6 +188,7 @@ const CreateEventPage: React.FC = () => {
                     value={formData.duration}
                     onChange={(e) => handleChange('duration', e.target.value)}
                     placeholder="e.g., 3"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                     required
                   />
                 </div>
@@ -191,35 +197,37 @@ const CreateEventPage: React.FC = () => {
           </Card>
 
           {/* Location & Venue */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <MapPin className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <MapPin className="h-5 w-5 text-yellow-400" />
                 Location & Venue
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Venue Name *
                   </label>
                   <Input
                     value={formData.venue}
                     onChange={(e) => handleChange('venue', e.target.value)}
                     placeholder="Where will this event take place?"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Location/Address *
                   </label>
                   <Input
                     value={formData.location}
                     onChange={(e) => handleChange('location', e.target.value)}
                     placeholder="City, Area, or Full Address"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                     required
                   />
                 </div>
@@ -228,17 +236,17 @@ const CreateEventPage: React.FC = () => {
           </Card>
 
           {/* Capacity & Pricing */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Users className="h-5 w-5 text-yellow-400" />
                 Capacity & Pricing
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Maximum Capacity *
                   </label>
                   <Input
@@ -246,22 +254,23 @@ const CreateEventPage: React.FC = () => {
                     value={formData.capacity}
                     onChange={(e) => handleChange('capacity', e.target.value)}
                     placeholder="Number of attendees"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
                     Ticket Price (ETB) *
                   </label>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
                       type="number"
                       value={formData.price}
                       onChange={(e) => handleChange('price', e.target.value)}
                       placeholder="0.00"
-                      className="pl-10"
+                      className="pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-gray-400"
                       required
                     />
                   </div>
@@ -271,10 +280,10 @@ const CreateEventPage: React.FC = () => {
           </Card>
 
           {/* Features & Amenities */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Tag className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Tag className="h-5 w-5 text-yellow-400" />
                 Features & Amenities
               </CardTitle>
             </CardHeader>
@@ -286,10 +295,11 @@ const CreateEventPage: React.FC = () => {
                       id={`amenity-${amenity}`}
                       checked={formData.amenities.includes(amenity)}
                       onCheckedChange={(checked) => handleAmenityChange(amenity, checked as boolean)}
+                      className="border-slate-600 data-[state=checked]:bg-yellow-400 data-[state=checked]:border-yellow-400"
                     />
                     <label
                       htmlFor={`amenity-${amenity}`}
-                      className="text-sm text-foreground cursor-pointer"
+                      className="text-sm text-gray-200 cursor-pointer"
                     >
                       {amenity}
                     </label>
@@ -302,8 +312,9 @@ const CreateEventPage: React.FC = () => {
                   id="featured"
                   checked={formData.featured}
                   onCheckedChange={(checked) => handleChange('featured', checked as boolean)}
+                  className="border-slate-600 data-[state=checked]:bg-yellow-400 data-[state=checked]:border-yellow-400"
                 />
-                <label htmlFor="featured" className="text-sm text-foreground cursor-pointer">
+                <label htmlFor="featured" className="text-sm text-gray-200 cursor-pointer">
                   Mark as Featured Event (Additional fee may apply)
                 </label>
               </div>
@@ -311,21 +322,21 @@ const CreateEventPage: React.FC = () => {
           </Card>
 
           {/* Photos & Media */}
-          <Card>
+          <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Upload className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Upload className="h-5 w-5 text-yellow-400" />
                 Event Images
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="border-2 border-dashed border-muted rounded-lg p-8 text-center">
-                <Upload className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                <h4 className="font-medium text-foreground mb-2">Upload Event Photos</h4>
-                <p className="text-sm text-muted-foreground mb-4">
+              <div className="border-2 border-dashed border-slate-600 rounded-lg p-8 text-center">
+                <Upload className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+                <h4 className="font-medium text-white mb-2">Upload Event Photos</h4>
+                <p className="text-sm text-gray-300 mb-4">
                   Add attractive photos of your event, venue, or similar past events
                 </p>
-                <Button variant="outline" type="button">
+                <Button variant="outline" type="button" className="border-slate-600 text-white hover:bg-slate-700">
                   Choose Photos
                 </Button>
               </div>
@@ -334,10 +345,10 @@ const CreateEventPage: React.FC = () => {
 
           {/* Submit Buttons */}
           <div className="flex gap-4">
-            <Button type="submit" className="flex-1">
+            <Button type="submit" className="flex-1 bg-yellow-400 text-black hover:bg-yellow-500">
               Create Event
             </Button>
-            <Button type="button" variant="outline" onClick={() => navigate(-1)}>
+            <Button type="button" variant="outline" onClick={() => navigate(-1)} className="border-slate-600 text-white hover:bg-slate-700">
               Cancel
             </Button>
           </div>

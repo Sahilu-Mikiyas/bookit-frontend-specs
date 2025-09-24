@@ -37,6 +37,7 @@ import RefundPolicyPage from "./pages/RefundPolicyPage";
 import PartnerApplicationPage from "./pages/PartnerApplicationPage";
 import CreateEventPage from "./pages/CreateEventPage";
 import CreateVenuePage from "./pages/CreateVenuePage";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -81,8 +82,16 @@ const App = () => (
               <Route path="/cookie-policy" element={<CookiePolicyPage />} />
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/partner-application" element={<PartnerApplicationPage />} />
-              <Route path="/create-event" element={<CreateEventPage />} />
-              <Route path="/create-venue" element={<CreateVenuePage />} />
+              <Route path="/create-event" element={
+                <ProtectedRoute requirePartner={true}>
+                  <CreateEventPage />
+                </ProtectedRoute>
+              } />
+              <Route path="/create-venue" element={
+                <ProtectedRoute requirePartner={true}>
+                  <CreateVenuePage />
+                </ProtectedRoute>
+              } />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
