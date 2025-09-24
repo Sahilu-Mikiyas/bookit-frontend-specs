@@ -31,6 +31,11 @@ import BookingGuidePage from "./pages/BookingGuidePage";
 import AboutPage from "./pages/AboutPage";
 import TermsPage from "./pages/TermsPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import ContactSupportPage from "./pages/ContactSupportPage";
+import CookiePolicyPage from "./pages/CookiePolicyPage";
+import RefundPolicyPage from "./pages/RefundPolicyPage";
+import PartnerApplicationPage from "./pages/PartnerApplicationPage";
+import CreateEventPage from "./pages/CreateEventPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +75,13 @@ const App = () => (
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/help" element={<HelpPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/contact-support" element={<ContactSupportPage />} />
+              <Route path="/booking-guide" element={<BookingGuidePage />} />
+              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+              <Route path="/refund-policy" element={<RefundPolicyPage />} />
+              <Route path="/partner-application" element={<PartnerApplicationPage />} />
+              <Route path="/create-event" element={<CreateEventPage />} />
+              <Route path="/create-venue" element={<CreateVenuePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

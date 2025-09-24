@@ -77,6 +77,33 @@ const Navbar: React.FC = () => {
               </Link>
             )}
 
+            {/* Create links for authenticated users */}
+            {isAuthenticated && (
+              <>
+                <Link to="/create-event">
+                  <Button 
+                    variant={isActive('/create-event') ? 'default' : 'ghost'} 
+                    size="sm"
+                    className="flex items-center space-x-2"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    <span>Create Event</span>
+                  </Button>
+                </Link>
+                
+                <Link to="/create-venue">
+                  <Button 
+                    variant={isActive('/create-venue') ? 'default' : 'ghost'} 
+                    size="sm"
+                    className="flex items-center space-x-2"
+                  >
+                    <MapPin className="h-4 w-4" />
+                    <span>Create Venue</span>
+                  </Button>
+                </Link>
+              </>
+            )}
+
             {/* Admin-specific links */}
             {isAuthenticated && role === 'admin' && (
               <Link to="/admin">

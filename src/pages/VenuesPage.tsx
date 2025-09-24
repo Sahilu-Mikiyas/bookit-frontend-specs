@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -116,7 +116,30 @@ const VenuesPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Venues Grid */}
+      {/* Partner Section for logged in users */}
+      {isAuthenticated && (
+        <section className="mb-8 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg p-8 text-center text-white">
+          <h2 className="text-2xl font-bold mb-4">List Your Venue with BookIt</h2>
+          <p className="mb-6 max-w-2xl mx-auto">
+            Connect with event organizers looking for the perfect space. 
+            Join our network of trusted venue providers and grow your business.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/create-venue">
+              <Button variant="secondary" size="lg" className="px-6">
+                List Your Venue
+              </Button>
+            </Link>
+            <Link to="/partner-application">
+              <Button variant="outline" size="lg" className="px-6 bg-white/10 border-white/30 text-white hover:bg-white/20">
+                Become a Partner
+              </Button>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Venues Grid */}
         {filteredVenues.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredVenues.map((venue) => (
