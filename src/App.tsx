@@ -36,6 +36,7 @@ import CookiePolicyPage from "./pages/CookiePolicyPage";
 import RefundPolicyPage from "./pages/RefundPolicyPage";
 import PartnerApplicationPage from "./pages/PartnerApplicationPage";
 import CreateEventPage from "./pages/CreateEventPage";
+import CreateVenuePage from "./pages/CreateVenuePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
