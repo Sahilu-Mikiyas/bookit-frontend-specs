@@ -2,6 +2,32 @@ import { Venue } from '@/types/venue';
 import { Event } from '@/types/event';
 import { Booking } from '@/types/booking';
 
+// Import venue images
+import conferenceCenter from '@/assets/venues/conference-center.jpg';
+import creativeStudio from '@/assets/venues/creative-studio.jpg';
+import executiveBoardroom from '@/assets/venues/executive-boardroom.jpg';
+import innovationHub from '@/assets/venues/innovation-hub.jpg';
+
+// Import event images
+import marketingSummit from '@/assets/events/marketing-summit.jpg';
+import designWorkshop from '@/assets/events/design-workshop.jpg';
+import boardMeeting from '@/assets/events/board-meeting.jpg';
+import startupPitch from '@/assets/events/startup-pitch.jpg';
+
+export const venueImages: Record<string, string> = {
+  '1': conferenceCenter,
+  '2': creativeStudio,
+  '3': executiveBoardroom,
+  '4': innovationHub,
+};
+
+export const eventImages: Record<string, string> = {
+  '1': marketingSummit,
+  '2': designWorkshop,
+  '3': boardMeeting,
+  '4': startupPitch,
+};
+
 export const mockVenues: Venue[] = [
   {
     id: '1',
