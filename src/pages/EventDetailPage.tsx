@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { getEventsWithVenues } from '@/data/mockData';
+import { getEventsWithVenues, eventImages, venueImages } from '@/data/mockData';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { 
@@ -45,6 +45,10 @@ const EventDetailPage: React.FC = () => {
       </div>
     );
   }
+
+  // Get event-specific image
+  const eventImage = eventImages[event.id] || '/placeholder.svg';
+  const venueImage = event.venue ? venueImages[event.venue.id] : '/placeholder.svg';
 
   const formatEventDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -109,9 +113,9 @@ const EventDetailPage: React.FC = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Event Hero */}
-            <div className="aspect-video rounded-lg overflow-hidden bg-muted">
+            <div className="aspect-video rounded-lg overflow-hidden bg-muted shadow-xl">
               <img 
-                src="/placeholder.svg"
+                src={eventImage}
                 alt={event.name}
                 className="w-full h-full object-cover"
               />
@@ -245,6 +249,15 @@ const EventDetailPage: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
+                    {/* Venue Image */}
+                    <div className="aspect-video rounded-lg overflow-hidden">
+                      <img 
+                        src={venueImage}
+                        alt={event.venue.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
                     <div>
                       <p className="font-medium">{event.venue.name}</p>
                       <p className="text-sm text-muted-foreground">{event.venue.location}</p>

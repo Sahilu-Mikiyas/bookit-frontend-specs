@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { mockVenues } from '@/data/mockData';
+import { mockVenues, venueImages } from '@/data/mockData';
 import { 
   ArrowLeft, 
   MapPin, 
@@ -16,7 +16,18 @@ import {
   Coffee,
   Monitor,
   Shield,
-  Calendar
+  Calendar,
+  Music,
+  Utensils,
+  Wind,
+  PenTool,
+  Sun,
+  Armchair,
+  Video,
+  Tv,
+  Gamepad2,
+  Cookie,
+  Phone
 } from 'lucide-react';
 
 const VenueDetailPage: React.FC = () => {
@@ -41,12 +52,9 @@ const VenueDetailPage: React.FC = () => {
     );
   }
 
-  // Mock images for demo
-  const images = [
-    '/placeholder.svg',
-    '/placeholder.svg',
-    '/placeholder.svg',
-  ];
+  // Get venue-specific image
+  const mainImage = venueImages[venue.id] || '/placeholder.svg';
+  const images = [mainImage, mainImage, mainImage];
 
   const amenityIcons: Record<string, React.ComponentType<any>> = {
     'WiFi': Wifi,
@@ -54,6 +62,20 @@ const VenueDetailPage: React.FC = () => {
     'Coffee Service': Coffee,
     'Projector': Monitor,
     'Secure Access': Shield,
+    'Sound System': Music,
+    'Catering': Utensils,
+    'Air Conditioning': Wind,
+    'Whiteboard': PenTool,
+    'Kitchen': Utensils,
+    'Natural Light': Sun,
+    'Flexible Seating': Armchair,
+    'Video Conferencing': Video,
+    'Leather Seating': Armchair,
+    'Multiple Screens': Tv,
+    'Standing Desks': Armchair,
+    'Phone Booths': Phone,
+    'Gaming Area': Gamepad2,
+    'Snack Bar': Cookie,
   };
 
   return (
@@ -70,7 +92,7 @@ const VenueDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Image Gallery */}
           <div className="space-y-4">
-            <div className="aspect-video rounded-lg overflow-hidden">
+            <div className="aspect-video rounded-lg overflow-hidden shadow-xl">
               <img 
                 src={images[selectedImageIndex]} 
                 alt={venue.name}
@@ -82,9 +104,9 @@ const VenueDetailPage: React.FC = () => {
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
-                  className={`aspect-video rounded-md overflow-hidden border-2 ${
+                  className={`aspect-video rounded-md overflow-hidden border-2 transition-all ${
                     selectedImageIndex === index 
-                      ? 'border-primary' 
+                      ? 'border-primary ring-2 ring-primary/50' 
                       : 'border-transparent hover:border-border'
                   }`}
                 >
