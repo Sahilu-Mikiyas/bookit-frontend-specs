@@ -33,7 +33,6 @@ const BookingCard: React.FC<BookingCardProps> = ({
   const formatDate = (dateString: string) => {
     return format(new Date(dateString), 'MMM dd, yyyy - h:mm a');
   };
-//card ends function here
   return (
     <Card className="hover:shadow-md transition-all duration-200">
       <CardHeader className="pb-3">
