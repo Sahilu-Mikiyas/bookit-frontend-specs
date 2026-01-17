@@ -108,3 +108,4 @@ const BookingCard: React.FC<BookingCardProps> = ({
 };
 
 export default BookingCard;
+//card ends function here
